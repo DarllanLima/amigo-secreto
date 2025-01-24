@@ -12,8 +12,20 @@ function adicionarAmigo() {
         listaAmigosSorteados.push(nomeDoAmigoDigitado);
         console.log(listaAmigosSorteados);
         limparCampo();
+        mostrarListaNaTela()
     }
 
+}
+
+function mostrarListaNaTela() {
+    let listaNaTela = document.querySelector('ul');
+    let numeroDeAmigosNaLista = listaAmigosSorteados.length;
+    if (numeroDeAmigosNaLista > 1) {
+       
+    } else {
+        let textoDaListaNaTela = listaAmigosSorteados;
+        listaNaTela.innerHTML = textoDaListaNaTela;
+    }
 }
 
 function limparCampo() {
