@@ -1,30 +1,38 @@
-let listaAmigosSorteados = [];
+let listaAmigosSecretos = [];
 
 function adicionarAmigo() {
-    let nomeDoAmigoDigitado = document.querySelector('input').value;
-    console.log(nomeDoAmigoDigitado);
 
-    if (listaAmigosSorteados.includes(nomeDoAmigoDigitado)) {
+    let digito = document.getElementById('amigo');
+    let nomeDoAmigoDigitado = digito.value.trim();
+
+
+    if (listaAmigosSecretos.includes(nomeDoAmigoDigitado)) {
         alert('O amigo digitado já está na lista.');
-        limparCampo();
+        return;
 
     } else {
-        listaAmigosSorteados.push(nomeDoAmigoDigitado);
-        console.log(listaAmigosSorteados);
-        limparCampo();
-        mostrarListaNaTela()
-    }
+        listaAmigosSecretos.push(nomeDoAmigoDigitado);
 
+        digito.value = ''
+
+    }
+    limparCampo();
+    mostrarListaNaTela()
 }
 
 function mostrarListaNaTela() {
-    let listaNaTela = document.querySelector('ul');
-    let numeroDeAmigosNaLista = listaAmigosSorteados.length;
-    if (numeroDeAmigosNaLista > 1) {
-       
-    } else {
-        let textoDaListaNaTela = listaAmigosSorteados;
-        listaNaTela.innerHTML = textoDaListaNaTela;
+    let listaNaTela = document.getElementById('listaAmigos');
+    
+    listaNaTela.innerHTML = '';
+
+    let numeroDeAmigosNaLista = 0;
+   
+    while (numeroDeAmigosNaLista < listaAmigosSecretos.length) {
+        let lista = document.createElement("li");
+        lista.textContent = listaAmigosSecretos[numeroDeAmigosNaLista];
+        listaNaTela.appendChild(lista); 
+
+        numeroDeAmigosNaLista++;
     }
 }
 
@@ -33,3 +41,17 @@ function limparCampo() {
     chute.value = '';
 }
 
+function sortearAmigo() {
+    if (listaAmigosSecretos.length == 0 ) {
+        alert('Por favor insira amigos antes de sortear.')
+        return;
+    }
+
+    let sorteador = Math.floor(Math.random() * listaAmigosSecretos.length);
+
+    let nomePessoaSorteada = listaAmigosSecretos[sorteador];
+
+    let resultadoDoAmigoSecreto = document.getElementById("resultado");
+    resultadoDoAmigoSecreto.innerHTML = "Seu amigo secreto é " + nomePessoaSorteada;
+
+}
